@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Michelle Asis — Your Bookkeeping Bestie</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#050d1a;
+  --navy2:#080f1f;
+  --navy3:#0a1628;
+  --navy4:#0d1f3c;
+  --cyan:#00d4ff;
+  --cyan2:#00b8d9;
+  --blue:#4f8ef7;
+  --purple:#7c6fcd;
+  --teal:#00e5c3;
+  --white:#ffffff;
+  --gray:#8892a4;
+  --gray2:#5a6478;
+  --border:rgba(255,255,255,0.07);
+  --sans:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--navy);
+  color:var(--white);
+  overflow-x:hidden;
+}
+
+/* STAR FIELD */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;
+  background-image:
+    radial-gradient(1px 1px at 10% 20%,rgba(255,255,255,0.4) 0%,transparent 100%),
+    radial-gradient(1px 1px at 30% 60%,rgba(255,255,255,0.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 50% 10%,rgba(255,255,255,0.35) 0%,transparent 100%),
+    radial-gradient(1px 1px at 70% 80%,rgba(255,255,255,0.25) 0%,transparent 100%),
+    radial-gradient(1px 1px at 90% 40%,rgba(255,255,255,0.4) 0%,transparent 100%),
+    radial-gradient(1px 1px at 20% 90%,rgba(255,255,255,0.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 80% 15%,rgba(255,255,255,0.35) 0%,transparent 100%),
+    radial-gradient(1px 1px at 45% 45%,rgba(255,255,255,0.2) 0%,transparent 100%),
+    radial-gradient(1px 1px at 60% 70%,rgba(255,255,255,0.3) 0%,transparent 100%),
+    radial-gradient(1px 1px at 15% 55%,rgba(255,255,255,0.25) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 85% 55%,rgba(0,212,255,0.3) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 35% 30%,rgba(79,142,247,0.3) 0%,transparent 100%),
+    radial-gradient(1.5px 1.5px at 65% 85%,rgba(0,229,195,0.25) 0%,transparent 100%);
+  pointer-events:none;
+}
+
+/* GLOW BLOBS */
+.glow{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
+.glow.g1{width:600px;height:600px;background:rgba(0,150,200,0.06);top:-200px;left:-200px}
+.glow.g2{width:500px;height:500px;background:rgba(79,142,247,0.06);bottom:-100px;right:-100px}
+.glow.g3{width:400px;height:400px;background:rgba(0,229,195,0.04);top:50%;left:50%;transform:translate(-50%,-50%)}
+
+/* REVEAL */
+.rev{opacity:0;transform:translateY(35px);transition:opacity 0.9s ease,transform 0.9s ease}
+.rev.on{opacity:1;transform:none}
+.rev-l{opacity:0;transform:translateX(-35px);transition:opacity 0.9s ease,transform 0.9s ease}
+.rev-l.on{opacity:1;transform:none}
+.rev-r{opacity:0;transform:translateX(35px);transition:opacity 0.9s ease,transform 0.9s ease}
+.rev-r.on{opacity:1;transform:none}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;width:100%;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 3rem;
+  background:rgba(5,13,26,0.8);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-size:1rem;font-weight:700;letter-spacing:0.5px;
+  display:flex;align-items:center;gap:0.4rem;
+}
+.nav-logo .dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--cyan);display:inline-block;
+}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  color:var(--gray);text-decoration:none;font-size:0.82rem;
+  font-weight:400;transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--white)}
+.nav-btn{
+  background:transparent;border:1px solid var(--border);
+  color:var(--gray);font-size:0.78rem;padding:0.45rem 1rem;
+  cursor:pointer;font-family:var(--sans);transition:all 0.2s;
+}
+.nav-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* HERO */
+#hero{
+  position:relative;z-index:1;
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:8rem 2rem 4rem;
+}
+.hero-system-tag{
+  font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--gray2);margin-bottom:2.5rem;
+  display:flex;align-items:center;gap:0.5rem;justify-content:center;
+}
+.hero-system-tag span{color:var(--cyan);opacity:0.7}
+.hero-h1{
+  font-size:clamp(2.8rem,6vw,5.5rem);
+  font-weight:900;line-height:1.05;
+  letter-spacing:-2px;margin-bottom:1.5rem;
+  max-width:800px;
+}
+.hero-h1 .grad{
+  background:linear-gradient(90deg,var(--cyan),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.hero-sub{
+  font-size:0.92rem;color:var(--gray);line-height:1.8;
+  max-width:520px;margin:0 auto 3rem;font-weight:300;
+}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:3.5rem}
+.btn-primary{
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  color:#fff;padding:0.85rem 2rem;
+  font-family:var(--sans);font-size:0.82rem;font-weight:600;
+  border:none;cursor:pointer;letter-spacing:0.3px;
+  transition:opacity 0.2s,transform 0.2s;text-decoration:none;display:inline-block;
+  border-radius:6px;
+}
+.btn-primary:hover{opacity:0.85;transform:translateY(-1px)}
+.btn-ghost{
+  background:transparent;color:var(--white);
+  padding:0.83rem 2rem;
+  font-family:var(--sans);font-size:0.82rem;font-weight:400;
+  border:1px solid rgba(255,255,255,0.2);cursor:pointer;
+  transition:all 0.2s;text-decoration:none;display:inline-block;
+  border-radius:6px;
+}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.hero-status{
+  display:flex;gap:2rem;justify-content:center;align-items:center;
+  font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--gray2);
+}
+.status-dot{
+  width:6px;height:6px;border-radius:50%;
+  display:inline-block;margin-right:0.5rem;
+}
+.status-dot.green{background:#00e676;box-shadow:0 0 6px #00e676}
+.status-dot.blue{background:var(--cyan);box-shadow:0 0 6px var(--cyan)}
+
+/* SECTION DIVIDER */
+.section-divider{
+  position:relative;z-index:1;
+  padding:1rem 3rem;
+  display:flex;align-items:center;justify-content:center;
+  gap:1rem;
+}
+.divider-label{
+  font-size:0.6rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--cyan);opacity:0.6;
+}
+.divider-line{height:1px;flex:1;background:var(--border);max-width:200px}
+
+/* STATS */
+#stats{
+  position:relative;z-index:1;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:rgba(255,255,255,0.02);
+}
+.stat-block{
+  padding:2.5rem 2rem;text-align:center;
+  border-right:1px solid var(--border);
+}
+.stat-block:last-child{border-right:none}
+.stat-n{
+  font-size:2.8rem;font-weight:800;
+  background:linear-gradient(135deg,var(--white),var(--cyan));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;line-height:1;margin-bottom:0.4rem;
+}
+.stat-l{font-size:0.65rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gray2)}
+
+/* SECTION */
+section.s{position:relative;z-index:1;padding:6rem 3rem}
+.container{max-width:1050px;margin:0 auto}
+.label-tag{
+  font-size:0.6rem;letter-spacing:4px;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:0.8rem;display:block;
+  opacity:0.8;
+}
+.s-title{
+  font-size:clamp(1.8rem,3.5vw,2.8rem);
+  font-weight:800;line-height:1.1;
+  letter-spacing:-1px;margin-bottom:1rem;
+}
+.s-sub{
+  font-size:0.85rem;color:var(--gray);line-height:1.9;
+  max-width:520px;margin-bottom:3rem;font-weight:300;
+}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-photo{
+  width:300px;height:300px;border-radius:50%;
+  border:1px solid rgba(0,212,255,0.2);
+  background:rgba(0,212,255,0.04);
+  display:flex;align-items:center;justify-content:center;
+  font-size:6rem;margin:0 auto;
+  position:relative;
+}
+.about-photo::before{
+  content:'';position:absolute;inset:-8px;border-radius:50%;
+  border:1px solid rgba(0,212,255,0.08);
+}
+.about-photo::after{
+  content:'';position:absolute;inset:-16px;border-radius:50%;
+  border:1px solid rgba(0,212,255,0.04);
+}
+.about-p{font-size:0.87rem;color:var(--gray);line-height:1.9;margin-bottom:1rem;font-weight:300}
+.highlight{color:var(--cyan);font-weight:500}
+.info-row{
+  display:flex;align-items:center;gap:0.75rem;
+  padding:0.7rem 0;border-bottom:1px solid var(--border);
+  font-size:0.82rem;color:var(--gray);
+}
+.info-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);flex-shrink:0}
+
+/* SERVICES */
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.service-card{
+  background:var(--navy);padding:2rem;
+  transition:background 0.25s;
+  position:relative;overflow:hidden;
+}
+.service-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  transform:scaleX(0);transition:transform 0.3s;
+}
+.service-card:hover{background:rgba(0,212,255,0.04)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-icon-wrap{
+  width:42px;height:42px;border-radius:10px;
+  border:1px solid rgba(0,212,255,0.2);
+  background:rgba(0,212,255,0.06);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;margin-bottom:1.2rem;
+}
+.service-name{font-size:0.9rem;font-weight:600;color:var(--white);margin-bottom:0.6rem}
+.service-desc{font-size:0.78rem;color:var(--gray);line-height:1.8;font-weight:300}
+
+/* CERTS */
+.certs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.cert-card{
+  border:1px solid var(--border);padding:2rem;
+  background:rgba(255,255,255,0.02);
+  position:relative;overflow:hidden;transition:border-color 0.25s,background 0.25s;
+}
+.cert-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;
+  height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.3s;
+}
+.cert-card:hover{border-color:rgba(0,212,255,0.2);background:rgba(0,212,255,0.03)}
+.cert-card:hover::after{transform:scaleX(1)}
+.cert-tag2{
+  font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--cyan);opacity:0.7;margin-bottom:0.75rem;display:block;
+}
+.cert-name2{font-size:0.95rem;font-weight:600;color:var(--white);margin-bottom:0.4rem;line-height:1.4}
+.cert-date2{font-size:0.72rem;color:var(--gray2)}
+
+/* TOOLS */
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.tool-card{
+  display:flex;align-items:center;gap:0.85rem;
+  padding:0.9rem 1.1rem;
+  border:1px solid var(--border);
+  background:rgba(255,255,255,0.02);
+  transition:all 0.2s;
+}
+.tool-card:hover{border-color:rgba(0,212,255,0.2);background:rgba(0,212,255,0.04)}
+.tool-num2{
+  font-size:0.65rem;color:var(--cyan);
+  font-weight:600;letter-spacing:1px;min-width:1.8rem;opacity:0.7;
+}
+.tool-name2{font-size:0.82rem;color:var(--white);font-weight:400}
+
+/* SKILLS */
+.skills-two{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.skill-row{margin-bottom:1.8rem}
+.skill-top2{display:flex;justify-content:space-between;margin-bottom:0.6rem}
+.skill-name2{font-size:0.82rem;color:var(--white);font-weight:500}
+.skill-pct2{font-size:0.72rem;color:var(--cyan);font-weight:600}
+.skill-track2{height:2px;background:rgba(255,255,255,0.07);position:relative}
+.skill-fill2{
+  height:100%;width:0;
+  background:linear-gradient(90deg,var(--blue),var(--cyan));
+  transition:width 1.4s cubic-bezier(0.4,0,0.2,1);
+  position:relative;
+}
+.skill-fill2::after{
+  content:'';position:absolute;right:0;top:50%;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--cyan);transform:translateY(-50%);
+  box-shadow:0 0 8px var(--cyan);
+}
+.skills-right h3{
+  font-size:1.6rem;font-weight:800;letter-spacing:-0.5px;margin-bottom:1rem;line-height:1.2;
+}
+.skills-right p{font-size:0.85rem;color:var(--gray);line-height:1.9;font-weight:300;margin-bottom:1rem}
+
+/* PROJECTS */
+.proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem}
+.proj-card{
+  border:1px solid var(--border);padding:2rem;
+  background:rgba(255,255,255,0.02);
+  transition:all 0.25s;position:relative;overflow:hidden;
+}
+.proj-card:hover{border-color:rgba(0,212,255,0.2);background:rgba(0,212,255,0.03)}
+.proj-num2{
+  font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--cyan);opacity:0.6;margin-bottom:0.7rem;display:block;
+}
+.proj-name2{font-size:1rem;font-weight:700;color:var(--white);margin-bottom:0.6rem}
+.proj-desc2{font-size:0.8rem;color:var(--gray);line-height:1.8;font-weight:300}
+
+/* WHY */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.why-card{
+  padding:2rem;border:1px solid var(--border);
+  background:rgba(255,255,255,0.02);
+  transition:all 0.25s;
+}
+.why-card:hover{border-color:rgba(0,229,195,0.2);background:rgba(0,229,195,0.03)}
+.why-num2{
+  font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--teal);opacity:0.7;margin-bottom:1rem;display:block;
+}
+.why-title2{font-size:0.92rem;font-weight:700;color:var(--white);margin-bottom:0.75rem}
+.why-body2{font-size:0.8rem;color:var(--gray);line-height:1.85;font-weight:300}
+
+/* CONTACT */
+#contact{position:relative;z-index:1;padding:6rem 3rem;background:rgba(0,0,0,0.2)}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start;max-width:1050px;margin:0 auto}
+.contact-h2{font-size:clamp(2rem,3.5vw,3rem);font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:1rem}
+.contact-sub2{font-size:0.85rem;color:var(--gray);line-height:1.9;margin-bottom:2.5rem;font-weight:300}
+.cinfo{display:flex;align-items:center;gap:1rem;padding:0.85rem 0;border-bottom:1px solid var(--border)}
+.cinfo-icon2{
+  width:36px;height:36px;border-radius:8px;
+  border:1px solid rgba(0,212,255,0.2);
+  background:rgba(0,212,255,0.06);
+  display:flex;align-items:center;justify-content:center;font-size:0.9rem;flex-shrink:0;
+}
+.cinfo-text2{font-size:0.83rem;color:var(--gray);font-weight:300}
+.form-f input,.form-f textarea{
+  width:100%;background:rgba(255,255,255,0.04);
+  border:1px solid var(--border);color:var(--white);
+  font-family:var(--sans);font-size:0.83rem;font-weight:300;
+  padding:0.85rem 1rem;outline:none;resize:none;
+  transition:border-color 0.2s;margin-bottom:1rem;border-radius:4px;
+}
+.form-f input::placeholder,.form-f textarea::placeholder{color:var(--gray2)}
+.form-f input:focus,.form-f textarea:focus{border-color:rgba(0,212,255,0.3)}
+.form-f textarea{height:120px}
+.btn-submit{
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  color:#fff;width:100%;padding:0.9rem;
+  font-family:var(--sans);font-size:0.82rem;font-weight:600;
+  border:none;cursor:pointer;letter-spacing:0.5px;
+  transition:opacity 0.2s;border-radius:4px;
+}
+.btn-submit:hover{opacity:0.85}
+
+/* FOOTER */
+footer{
+  position:relative;z-index:1;
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.5rem 3rem;
+  font-size:0.7rem;color:var(--gray2);letter-spacing:1px;
+}
+footer span.cyan{color:var(--cyan);opacity:0.7}
+
+@media(max-width:800px){
+  nav{padding:1rem 1.2rem}
+  .nav-links{gap:1rem}
+  .nav-links a{font-size:0.72rem}
+  section.s,#contact{padding:4rem 1.2rem}
+  #stats{grid-template-columns:repeat(2,1fr)}
+  .stat-block{border-right:none;border-bottom:1px solid var(--border)}
+  .about-grid,.skills-two,.contact-inner{grid-template-columns:1fr}
+  .services-grid,.certs-grid,.tools-grid,.proj-grid,.why-grid{grid-template-columns:1fr}
+  .hero-h1{letter-spacing:-1px}
+}
+</style>
+</head>
+<body>
+
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+<div class="glow g3"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">MICHELLE <div class="dot"></div> ASIS</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me</button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-system-tag rev">
+    <span>BOOKKEEPER</span> // <span>PAYROLL SPECIALIST</span>
+  </div>
+  <h1 class="hero-h1 rev" style="transition-delay:0.1s">
+    Your Business Deserves<br/><span class="grad">Stress-Free Finances.</span>
+  </h1>
+  <p class="hero-sub rev" style="transition-delay:0.2s">
+    I help small business owners stay financially organized with accurate books, smooth payroll, and easy-to-understand reports — so you can focus on growth.
+  </p>
+  <div class="hero-btns rev" style="transition-delay:0.3s">
+    <a href="#contact" class="btn-primary">Work With Me</a>
+    <a href="#projects" class="btn-ghost">See My Work</a>
+  </div>
+  <div class="hero-status rev" style="transition-delay:0.4s">
+    <span><span class="status-dot green"></span>Available for clients</span>
+    <span><span class="status-dot blue"></span>3 certifications active</span>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stat-block rev">
+    <div class="stat-n" data-target="3">0</div>
+    <div class="stat-l">Certifications</div>
+  </div>
+  <div class="stat-block rev" style="transition-delay:0.1s">
+    <div class="stat-n" data-target="30">0</div>
+    <div class="stat-l">Employees Managed</div>
+  </div>
+  <div class="stat-block rev" style="transition-delay:0.2s">
+    <div class="stat-n" data-target="9">0</div>
+    <div class="stat-l">Tools Mastered</div>
+  </div>
+  <div class="stat-block rev" style="transition-delay:0.3s">
+    <div class="stat-n">100+</div>
+    <div class="stat-l">Transactions Reconciled</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="s" id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="rev-l" style="display:flex;justify-content:center">
+        <div class="about-photo">MA</div>
+      </div>
+      <div class="rev-r">
+        <span class="label-tag">About Me</span>
+        <h2 class="s-title">Michelle Asis</h2>
+        <p class="about-p">Hi! I'm Michelle — a detail-oriented bookkeeper and payroll specialist with a passion for helping businesses stay financially organized and stress-free.</p>
+        <p class="about-p">I'm a graduate of <span class="highlight">BS in Entrepreneurship</span> and a <span class="highlight">QuickBooks Certified ProAdvisor</span>. With solid business knowledge and hands-on experience in bookkeeping and payroll, I bring both accuracy and reliability to the table.</p>
+        <div style="margin-top:1.5rem">
+          <div class="info-row"><div class="info-dot"></div>Manage finances using QuickBooks Online</div>
+          <div class="info-row"><div class="info-dot"></div>Track timesheets & process payroll with Hubstaff and Patriot</div>
+          <div class="info-row"><div class="info-dot"></div>Deliver clear monthly reports for smart business decisions</div>
+          <div class="info-row"><div class="info-dot"></div>Based in Ocampo, Camarines Sur · Remote-ready</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider"><div class="divider-line"></div><span class="divider-label">Core Services</span><div class="divider-line"></div></div>
+
+<!-- SERVICES -->
+<section class="s" id="services" style="padding-top:2rem">
+  <div class="container">
+    <div style="margin-bottom:3rem;text-align:center" class="rev">
+      <span class="label-tag" style="display:block;text-align:center">What I Offer</span>
+      <h2 class="s-title" style="text-align:center">Services Offered</h2>
+      <p class="s-sub" style="margin:0 auto;text-align:center">Comprehensive bookkeeping solutions tailored to your business needs.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card rev"><div class="service-icon-wrap">📚</div><div class="service-name">General Bookkeeping</div><p class="service-desc">Accurate recording, categorizing, and reconciling of all financial transactions using QuickBooks Online.</p></div>
+      <div class="service-card rev" style="transition-delay:0.08s"><div class="service-icon-wrap">💸</div><div class="service-name">Payroll Management</div><p class="service-desc">Full payroll processing for teams via Hubstaff and Patriot — timesheets, calculations, and timely disbursements.</p></div>
+      <div class="service-card rev" style="transition-delay:0.16s"><div class="service-icon-wrap">📊</div><div class="service-name">Financial Reporting</div><p class="service-desc">Clear monthly reports — profit & loss, balance sheets, and cash flow statements that drive smart decisions.</p></div>
+      <div class="service-card rev" style="transition-delay:0.24s"><div class="service-icon-wrap">💰</div><div class="service-name">Cash Flow Monitoring</div><p class="service-desc">Daily cash flow tracking via Quicken to prevent shortfalls and maintain sufficient business liquidity.</p></div>
+      <div class="service-card rev" style="transition-delay:0.32s"><div class="service-icon-wrap">🔍</div><div class="service-name">Bank Reconciliation</div><p class="service-desc">Matching bank feeds with QBO records to ensure all data is accurate and discrepancies are caught early.</p></div>
+      <div class="service-card rev" style="transition-delay:0.4s"><div class="service-icon-wrap">📈</div><div class="service-name">Data Analysis</div><p class="service-desc">Leveraging Power BI and Google Sheets to transform financial data into actionable business insights.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider"><div class="divider-line"></div><span class="divider-label">Credentials</span><div class="divider-line"></div></div>
+
+<!-- CERTS -->
+<section class="s" id="certs" style="padding-top:2rem">
+  <div class="container">
+    <div style="margin-bottom:3rem" class="rev">
+      <span class="label-tag">Certifications</span>
+      <h2 class="s-title">Proudly Certified</h2>
+      <p class="s-sub" style="margin-bottom:0">I don't just do the numbers — I do them right.</p>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card rev"><span class="cert-tag2">Intuit QuickBooks</span><div class="cert-name2">QuickBooks Online Certification</div><div class="cert-date2">Issued: July 17, 2024</div></div>
+      <div class="cert-card rev" style="transition-delay:0.15s"><span class="cert-tag2">Intuit QuickBooks</span><div class="cert-name2">QuickBooks Online Payroll Certification</div><div class="cert-date2">Issued: July 30, 2024</div></div>
+      <div class="cert-card rev" style="transition-delay:0.3s"><span class="cert-tag2">Intuit QuickBooks</span><div class="cert-name2">Advanced QuickBooks Online Certification</div><div class="cert-date2">Issued: August 25, 2024</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TOOLS -->
+<section class="s" id="tools" style="background:rgba(0,0,0,0.15)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start">
+      <div class="rev-l">
+        <span class="label-tag">Tech Stack</span>
+        <h2 class="s-title">Tools I Work With</h2>
+        <p class="s-sub" style="margin-bottom:0">Industry-trusted software that keeps your business running smoothly behind the scenes.</p>
+      </div>
+      <div class="rev-r">
+        <div class="tools-grid">
+          <div class="tool-card"><span class="tool-num2">01</span><span class="tool-name2">QuickBooks Online</span></div>
+          <div class="tool-card"><span class="tool-num2">02</span><span class="tool-name2">Patriot Payroll</span></div>
+          <div class="tool-card"><span class="tool-num2">03</span><span class="tool-name2">Hubstaff</span></div>
+          <div class="tool-card"><span class="tool-num2">04</span><span class="tool-name2">Quicken</span></div>
+          <div class="tool-card"><span class="tool-num2">05</span><span class="tool-name2">Google Sheets</span></div>
+          <div class="tool-card"><span class="tool-num2">06</span><span class="tool-name2">Microsoft Office</span></div>
+          <div class="tool-card"><span class="tool-num2">07</span><span class="tool-name2">Power BI</span></div>
+          <div class="tool-card"><span class="tool-num2">08</span><span class="tool-name2">Lovable</span></div>
+          <div class="tool-card"><span class="tool-num2">09</span><span class="tool-name2">Laravel</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="s" id="skills">
+  <div class="container">
+    <div style="margin-bottom:3rem" class="rev">
+      <span class="label-tag">Expertise</span>
+      <h2 class="s-title">Skills & Expertise</h2>
+    </div>
+    <div class="skills-two">
+      <div class="rev-l">
+        <div class="skill-row"><div class="skill-top2"><span class="skill-name2">Bookkeeping</span><span class="skill-pct2">95%</span></div><div class="skill-track2"><div class="skill-fill2" data-w="95"></div></div></div>
+        <div class="skill-row"><div class="skill-top2"><span class="skill-name2">Payroll Management</span><span class="skill-pct2">90%</span></div><div class="skill-track2"><div class="skill-fill2" data-w="90"></div></div></div>
+        <div class="skill-row"><div class="skill-top2"><span class="skill-name2">Cash Flow Analysis</span><span class="skill-pct2">88%</span></div><div class="skill-track2"><div class="skill-fill2" data-w="88"></div></div></div>
+        <div class="skill-row"><div class="skill-top2"><span class="skill-name2">Financial Reporting</span><span class="skill-pct2">85%</span></div><div class="skill-track2"><div class="skill-fill2" data-w="85"></div></div></div>
+        <div class="skill-row"><div class="skill-top2"><span class="skill-name2">Data Analysis</span><span class="skill-pct2">80%</span></div><div class="skill-track2"><div class="skill-fill2" data-w="80"></div></div></div>
+      </div>
+      <div class="skills-right rev-r">
+        <h3>Detail-oriented<br/>by nature.</h3>
+        <p>As a bookkeeper and payroll specialist, I've developed a strong skill set that ensures accuracy and efficiency in managing financial records.</p>
+        <p>These skills allow me to not only maintain accurate records but also provide actionable insights that help businesses make informed decisions — committed to delivering reliable, detail-oriented financial management.</p>
+        <div style="margin-top:2rem">
+          <a href="#contact" class="btn-primary" style="display:inline-block">Get Started →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER -->
+<div class="section-divider"><div class="divider-line"></div><span class="divider-label">Project Overview</span><div class="divider-line"></div></div>
+
+<!-- PROJECTS -->
+<section class="s" id="projects" style="padding-top:2rem">
+  <div class="container">
+    <div style="margin-bottom:3rem" class="rev">
+      <span class="label-tag">My Work</span>
+      <h2 class="s-title">Projects</h2>
+    </div>
+    <div class="proj-grid">
+      <div class="proj-card rev"><span class="proj-num2">QuickBooks Online // 01</span><div class="proj-name2">Bank Reconciliation</div><p class="proj-desc2">Reconciled bank transactions in QBO by matching bank feed with records — ensuring accuracy, preventing errors, and identifying discrepancies for a clear financial position.</p></div>
+      <div class="proj-card rev" style="transition-delay:0.1s"><span class="proj-num2">Hubstaff · Patriot // 02</span><div class="proj-name2">Payroll Management</div><p class="proj-desc2">Managed payroll for 30 employees — timesheet verification, productivity tracking, and weekly processing. Handled owner payroll via Patriot with full precision and confidentiality.</p></div>
+      <div class="proj-card rev" style="transition-delay:0.2s"><span class="proj-num2">Quicken // 03</span><div class="proj-name2">Cash Flow Monitoring</div><p class="proj-desc2">Daily cash flow monitoring — tracking recurring income and expenses, identifying low-balance periods, and preventing budget shortfalls to maintain sufficient business liquidity.</p></div>
+      <div class="proj-card rev" style="transition-delay:0.3s"><span class="proj-num2">Full Cycle // 04</span><div class="proj-name2">Monthly Close & Reporting</div><p class="proj-desc2">End-to-end monthly close — journal entries, account reconciliation, and delivery of clear P&L and Balance Sheet reports that support smart business decision-making.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="s" style="background:rgba(0,0,0,0.2)" id="why">
+  <div class="container">
+    <div style="margin-bottom:3rem;text-align:center" class="rev">
+      <span class="label-tag" style="display:block;text-align:center">Why Choose Me</span>
+      <h2 class="s-title" style="text-align:center">Why Work With Me?</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card rev"><span class="why-num2">Module // 01</span><div class="why-title2">Accuracy & Attention to Detail</div><p class="why-body2">Every transaction, payroll, and financial report is precise and error-free. My meticulous approach ensures clean books and reliable records at all times.</p></div>
+      <div class="why-card rev" style="transition-delay:0.12s"><span class="why-num2">Module // 02</span><div class="why-title2">Payroll & Financial Expertise</div><p class="why-body2">Hands-on experience with QBO, Hubstaff, Patriot, Quicken, and Excel — managing bookkeeping, payroll, and cash flow with efficiency and actionable insight.</p></div>
+      <div class="why-card rev" style="transition-delay:0.24s"><span class="why-num2">Module // 03</span><div class="why-title2">Client-Focused & Reliable</div><p class="why-body2">Clear communication, timely reporting, and a genuine understanding of your needs — so you can focus on growing your business while I handle the numbers.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="rev-l">
+      <span class="label-tag">Get in Touch</span>
+      <h2 class="contact-h2">Let's Connect!</h2>
+      <p class="contact-sub2">Ready to take the stress out of your bookkeeping and payroll? I'd love to hear about your business and how I can help.</p>
+      <div class="cinfo"><div class="cinfo-icon2">📍</div><span class="cinfo-text2">Ocampo, Camarines Sur</span></div>
+      <div class="cinfo"><div class="cinfo-icon2">📞</div><span class="cinfo-text2">+639569788532</span></div>
+      <div class="cinfo"><div class="cinfo-icon2">✉️</div><span class="cinfo-text2">chellai030192@gmail.com</span></div>
+    </div>
+    <div class="form-f rev-r">
+      <input type="text" placeholder="Your name"/>
+      <input type="email" placeholder="Your email address"/>
+      <input type="text" placeholder="How can I help you?"/>
+      <textarea placeholder="Tell me more about your business needs..."></textarea>
+      <button class="btn-submit" onclick="alert('Message sent! Connect this to your backend.')">Work With Me →</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 <span class="cyan">Michelle Asis</span> — Bookkeeper & Payroll Specialist</span>
+  <span>chellai030192@gmail.com</span>
+</footer>
+
+<script>
+// Scroll reveal
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}});
+},{threshold:0.1});
+document.querySelectorAll('.rev,.rev-l,.rev-r').forEach(el=>obs.observe(el));
+
+// Counters
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target,t=parseInt(el.dataset.target);
+    if(!t)return;
+    let n=0;
+    const go=()=>{n+=Math.ceil(t/50);if(n>=t){el.textContent=t;return;}el.textContent=n;requestAnimationFrame(go);};
+    go();cObs.unobserve(el);
+  });
+},{threshold:0.5});
+document.querySelectorAll('.stat-n[data-target]').forEach(el=>cObs.observe(el));
+
+// Skill bars
+const sObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting)return;
+    e.target.querySelectorAll('.skill-fill2').forEach(f=>{
+      setTimeout(()=>{f.style.width=f.dataset.w+'%'},200);
+    });
+    sObs.unobserve(e.target);
+  });
+},{threshold:0.2});
+document.querySelectorAll('#skills .container').forEach(el=>sObs.observe(el));
+</script>
+</body>
+</html>
